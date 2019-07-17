@@ -1,20 +1,15 @@
 <template>
     <div id="app">
-        <!--<img alt="Vue logo" src="./assets/logo.png">-->
-        <img alt="stardust" src="./assets/stardust2.png">
-        <HelloWorld msg="Welcomellalalfdmwieiwhefihweiff"/>
+        <div id="nav">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/about">About</router-link>
+        </div>
+        <router-view/>
     </div>
 </template>
 
 <script>
-    import HelloWorld from './components/HelloWorld.vue'
 
-    export default {
-        name: 'app',
-        components: {
-            HelloWorld
-        }
-    }
 </script>
 
 <style lang="scss">
@@ -29,9 +24,23 @@
         text-align: center;
         color: $font_color;
         width: 100%;
-        /*margin-top: 60px;*/
-        img{
-            width: 100%;
-        }
+        min-width: 1000px;
+        height: 100vh;
+        background-image: url("assets/stardust3.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
     }
+    #nav {
+        padding: 30px;
+    }
+
+    #nav a {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    #nav a.router-link-exact-active {
+        color: #42b983;
+    }
+
 </style>
