@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="navBar">
       <router-link class="navbar-brand" to="/">Icestains</router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -9,7 +9,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div class="navbar-nav" v-on:click="clickNavBar">
           <router-link class="nav-item nav-link" to="/">Home</router-link>
           <router-link class="nav-item nav-link" to="/nav">Nav</router-link>
           <router-link class="nav-item nav-link" to="/about">About</router-link>
@@ -38,12 +38,42 @@
 
   import HelloWorld from '@/components/HelloWorld.vue'
   import Footer from '@/components/Footer.vue'
+  import $ from 'jquery'
 
 
   export default {
     components: {
       HelloWorld,
       Footer
+    },
+    mounted() {
+      window.console.log('mounted')
+      this.showPathBtn()
+    },
+    updated() {
+      window.console.log('updated')
+      this.showPathBtn()
+    },
+    methods: {
+      clickNavBar() {
+        if ($('.navbar-toggler').is(':visible')) {
+          window.console.log('clickNavBar')
+          $('.navbar-toggler').click()
+        }
+        this.showPathBtn()
+
+      },
+      showPathBtn() {
+        $('.navbar-nav').find('a').each(function () {
+          let aHref = $(this).attr('href')
+          if (aHref === location.pathname) {
+            window.console.log('showFct' + aHref)
+            $(this).addClass("active")
+          } else {
+            $(this).removeClass("active")
+          }
+        })
+      }
     }
   }
 
@@ -71,7 +101,7 @@
   }
 
   .navbar {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
   }
 
