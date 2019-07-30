@@ -1,46 +1,110 @@
 <template>
-    <div id="app">
-        <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+      <router-link class="navbar-brand" to="/">Icestains</router-link>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <router-link class="nav-item nav-link" to="/">Home</router-link>
+          <router-link class="nav-item nav-link" to="/nav">Nav</router-link>
+          <router-link class="nav-item nav-link" to="/about">About</router-link>
         </div>
+      </div>
+    </nav>
+
+    <section class="main">
+      <HelloWorld msg="Welcome"/>
+      <transition
+        name="changeMain"
+        mode="out-in"
+        appear
+        appear-class="changeMain-enter"
+        appear-active-class="changeMain-enter-active">
         <router-view/>
-    </div>
+      </transition>
+    </section>
+
+    <Footer class="footer"/>
+
+  </div>
 </template>
 
 <script>
 
+  import HelloWorld from '@/components/HelloWorld.vue'
+  import Footer from '@/components/Footer.vue'
+
+
+  export default {
+    components: {
+      HelloWorld,
+      Footer
+    }
+  }
+
 </script>
 
-<style lang="scss">
-    $font_color: #2c3e50;
-    body{
-        margin: 0;
-    }
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: $font_color;
-        width: 100%;
-        min-width: 1000px;
-        height: 100vh;
-        background-image: url("assets/stardust3.png");
-        background-size: 100%;
-        background-repeat: no-repeat;
-    }
-    #nav {
-        padding: 30px;
-    }
+<style lang="less">
+  @font_color: #2c3e50;
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
 
-    #nav a {
-        font-weight: bold;
-        color: #2c3e50;
-    }
+  #app {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: @font_color;
+    width: 100%;
+    min-height: 100vh;
 
-    #nav a.router-link-exact-active {
-        color: #42b983;
-    }
+  }
+
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+  }
+
+  .main {
+    flex: 1 0 auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+  }
+
+  .changeMain-appear {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  .changeMain-enter-active, .changeMain-leave-active {
+    transition: all .3s;
+  }
+
+  .changeMain-enter {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+
+
+  .changeMain-leave-to {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  .footer {
+
+  }
 
 </style>
