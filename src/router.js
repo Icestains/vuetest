@@ -25,7 +25,7 @@ export default new Router({
         {
             path: '/nav',
             name: 'nav',
-            component: () => import('./views/Nav.vue')
+            component: () => import('./components/Nav.vue')
         },
     ]
 })
